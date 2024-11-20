@@ -10,25 +10,40 @@ export default function Home() {
       try {
         const evalResult = eval(expression).toString();
         setResult(evalResult);
-        setExpression(evalResult);
+        setExpression(evalResult); // Update expression with result for further calculations
       } catch (error) {
-        setResult('Error');
+        setResult('Syntax Error'); // Handle invalid expressions gracefully
       }
     } else if (value === 'C') {
       setResult('');
-      setExpression('');
+      setExpression(''); // Clear both result and expression
     } else {
       const lastChar = expression.slice(-1);
       const operators = ['+', '-', '*', '/'];
-  
-      if (operators.includes(lastChar) && operators.includes(value)) {
-        // Replace last operator with new one
-        const newExpression = expression.slice(0, -1) + value;
-        setExpression(newExpression);
+    
+      if (value === '.') {
+        // Prevent multiple decimals in a single number
+        let i = expression.length - 1;
+        while (i >= 0 && !operators.includes(expression[i])) {
+          if (expression[i] === '.') {
+            return; // Stop if a decimal is already in the current number
+          }
+          i--;
+        }
+      }
+    
+      if (operators.includes(value)) {
+        if (operators.includes(lastChar)) {
+          // Prevent consecutive operators
+          setExpression((prev) => prev.slice(0, -1) + value);
+        } else {
+          setExpression((prev) => prev + value);
+        }
       } else {
-        setExpression((prevExpression) => prevExpression + value);
+        setExpression((prev) => prev + value); // Append valid values
       }
     }
+    
   };
 
   const button = [
