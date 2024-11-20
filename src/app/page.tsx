@@ -27,28 +27,35 @@ export default function Home() {
     'C'
   ]
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <>
+    <div className="container">
+    <div className="image-container">
+          <img src="logo.JPG" alt="Image" />
+        </div>
+        <div className="text-container">
     <h1 className="text-4xl font-bold mb10">Calculator</h1>
-    <div className="bg white p-6 rounded lg shadow-lg">
+    <div className="bg p-6 rounded lg shadow-lg t">
       <input type="text" 
-      className="w-full mb-2 text-3xl border-b-2 border-gry-400 focus:outline-none" 
+      className="w-full mb-2 text-3xl border-b-2 border-gray-400 focus:outline-none t" 
       value={expression}
       readOnly
       />
       <input type="text" 
-      className="w-full text-4xl font-bold mb-4 focus-outline"
+      className="w-full text-4xl font-bold mb-4 focus-outline t"
       value={result}
       readOnly/>
       <div className="grid grid-cols-4 gap-2">
       {button.map((btn) => (
         <button
         key={btn}
-        onClick={() => handleButtonClick(btn)} className="text-4xl bg-gray-300 hover:bg-gray-400 p-2 rounded-lg">{btn}</button>
+        onClick={() => handleButtonClick(btn)} className="text-4xl bg hover:bg-gray-400 p-2 rounded-lg t">{btn}</button>
       ))}
       </div>
       
 
     </div>
-    </main>
+    </div>
+    </div>
+    </>
   );
 }
