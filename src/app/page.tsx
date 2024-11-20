@@ -5,17 +5,29 @@ export default function Home() {
   const [result, setResult] = useState('')
   const [expression, setExpression] = useState('')
 
-  const handleButtonClick = (value: string) => {
+  const handleButtonClick = (value) => {
     if (value === '=') {
-        const evalResult= eval(expression).toString();
+      try {
+        const evalResult = eval(expression).toString();
         setResult(evalResult);
         setExpression(evalResult);
-        //setResult('Error');
+      } catch (error) {
+        setResult('Error');
+      }
     } else if (value === 'C') {
       setResult('');
       setExpression('');
-    }else{
-      setExpression((prevExpression) => prevExpression + value);
+    } else {
+      const lastChar = expression.slice(-1);
+      const operators = ['+', '-', '*', '/'];
+  
+      if (operators.includes(lastChar) && operators.includes(value)) {
+        // Replace last operator with new one
+        const newExpression = expression.slice(0, -1) + value;
+        setExpression(newExpression);
+      } else {
+        setExpression((prevExpression) => prevExpression + value);
+      }
     }
   };
 
