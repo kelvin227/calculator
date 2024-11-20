@@ -7,13 +7,10 @@ export default function Home() {
 
   const handleButtonClick = (value) => {
     if (value === '=') {
-      try{
         const evalResult= eval(expression).toString();
         setResult(evalResult);
         setExpression(evalResult);
-      } catch (error) {
-        setResult('Error');
-      }
+        //setResult('Error');
     } else if (value === 'C') {
       setResult('');
       setExpression('');
