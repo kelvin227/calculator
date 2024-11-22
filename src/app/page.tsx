@@ -7,7 +7,6 @@ export default function Home() {
   let last = '';
   let replace = '';
   let replace2 = '';
-
   function getlastChar(char: string) {
     return char[char.length - 1];
   }
@@ -32,7 +31,7 @@ export default function Home() {
       setResult(evalResult);
       setExpression('');
     } catch(error){
-      setResult('SyntaxError');
+      setResult('syntax error');
     }
     } else if(last === '*'){
       replace = expression.toString();
@@ -209,8 +208,5 @@ setResult('SyntaxError');
     </div>
     </>
   );
-}
-function and(arg0: boolean) {
-  throw new Error("Function not implemented.");
 }
 
