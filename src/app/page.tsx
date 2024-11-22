@@ -182,9 +182,9 @@ setResult('SyntaxError');
     <div className="image-container">
           <img src="logo.JPG" alt="Image" />
         </div>
-        <div className="text-container">
+        <div className="text-container w">
     <h1 className="text-4xl font-bold mb10">Calculator</h1>
-    <div className="bg p-6 rounded lg shadow-lg t">
+    <div className="bg p-6 rounded lg shadow-lg t w">
       <input id="express" type="text" 
       className="w-full mb-2 text-3xl border-b-2 border-gray-400 focus:outline-none t" 
       value={expression}
@@ -198,7 +198,7 @@ setResult('SyntaxError');
       {button.map((btn) => (
         <button
         key={btn}
-        onClick={() => handleButtonClick(btn)} className="text-4xl bg hover:bg-gray-400 p-2 rounded-lg t">{btn}</button>
+        onClick={() => handleButtonClick(btn)} className="text-4xl p-2 rounded-lg t w b">{btn}</button>
       ))}
       </div>
       

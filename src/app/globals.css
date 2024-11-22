@@ -5,12 +5,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --button: hsl(57, 100%, 50%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --button: #727272;
   }
 }
 
@@ -27,7 +29,7 @@ body {
 .container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -79,8 +81,12 @@ body {
   }
 }
 
-@keyframes background-change {
-  100% {
-    background-color: #000;
-  }
+.w {
+  width: 100%;
+  height: 100%;
 }
+.b{
+  background: var(--button);
+  border-radius: 10pc;
+}
+  
