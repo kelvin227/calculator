@@ -4,44 +4,169 @@ import { useState } from "react";
 export default function Home() {
   const [result, setResult] = useState('')
   const [expression, setExpression] = useState('')
-
+  let last = '';
+  let replace;
+  let replace2;
+  function getlastChar(char: string) {
+    return char[char.length - 1];
+  }
   const handleButtonClick = (value: string) => {
     if (value === '=') {
-      try {
-        const evalResult = eval(expression).toString();
+      last = getlastChar(expression).toString();
+      if(last === '-'){
+          replace = expression.toString();
+          replace2 = replace.slice(0, -1)
+          try{
+        const evalResult= eval(expression + replace2).toString();
         setResult(evalResult);
-        setExpression(evalResult); // Update expression with result for further calculations
-      } catch (error) {
-        setResult('Syntax Error'); // Handle invalid expressions gracefully
+        setExpression('');
+      } catch(error){
+        setResult('SyntaxError');
       }
+      } else if(last === '+'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        try{
+      const evalResult= eval(expression + replace2).toString();
+      setResult(evalResult);
+      setExpression('');
+    } catch(error){
+      setResult('SyntaxError');
+    }
+    } else if(last === '*'){
+      replace = expression.toString();
+      replace2 = replace.slice(0, -1)
+      try{
+    const evalResult= eval(expression + replace2).toString();
+    setResult(evalResult);
+    setExpression('');
+  } catch(error){
+    setResult('SyntaxError');
+  }
+  } else if(last === '/'){
+    replace = expression.toString();
+    replace2 = replace.slice(0, -1)
+    try{
+  const evalResult= eval(expression + replace2).toString();
+  setResult(evalResult);
+  setExpression('');
+} catch(error){
+  setResult('SyntaxError');
+}
+} else{
+  try{
+const evalResult= eval(expression).toString();
+setResult(evalResult);
+setExpression('');
+} catch(error){
+setResult('SyntaxError');
+}
+}
+  
+      
     } else if (value === 'C') {
       setResult('');
-      setExpression(''); // Clear both result and expression
-    } else {
-      const lastChar = expression.slice(-1);
-      const operators = ['+', '-', '*', '/'];
-    
-      if (value === '.') {
-        // Prevent multiple decimals in a single number
-        let i = expression.length - 1;
-        while (i >= 0 && !operators.includes(expression[i])) {
-          if (expression[i] === '.') {
-            return; // Stop if a decimal is already in the current number
-          }
-          i--;
-        }
+      setExpression('');
+    } else if(value === 'del'){
+      last = getlastChar(expression).toString();
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2);
+      } 
+    else if(value === '/'){
+      last = getlastChar(expression).toString();
+      if(last === '/'){
+
+      }else if(last === '*'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }else if(last === '+'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }else if(last === '-'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }
+      else{
+        setExpression((prevExpression) => prevExpression + value);
       }
     
-      if (operators.includes(value)) {
-        if (operators.includes(lastChar)) {
-          // Prevent consecutive operators
-          setExpression((prev) => prev.slice(0, -1) + value);
-        } else {
-          setExpression((prev) => prev + value);
-        }
-      } else {
-        setExpression((prev) => prev + value); // Append valid values
+    } else if(value === '+'){
+      last = getlastChar(expression).toString();
+      if(last === '+'){
+
+      }else if(last === '-'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }else if(last === '*'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }else if(last === '/'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
       }
+      else{
+        setExpression((prevExpression) => prevExpression + value);
+      }
+    }
+      else if(value === '-'){
+      last = getlastChar(expression).toString();
+      if(last === '-'){
+
+      }else if(last === '+'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      } else if(last === '*'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      } else if(last === '/'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }
+      else{
+        setExpression((prevExpression) => prevExpression + value);
+      }
+    }
+    else if(value === '*'){
+      last = getlastChar(expression).toString();
+      if(last === '*'){
+
+      }else if(last === '-'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }else if(last === '/'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }else if(last === '+'){
+        replace = expression.toString();
+        replace2 = replace.slice(0, -1)
+        setExpression(replace2 + value);
+      }
+      else{
+        setExpression((prevExpression) => prevExpression + value);
+      }
+    }
+    else if(value === '.'){
+      last = getlastChar(expression).toString();
+      if(last === '.'){
+
+      }else{
+        setExpression((prevExpression) => prevExpression + value);
+      }
+    }
+    else{
+      setExpression((prevExpression) => prevExpression + value);
     }
     
   };
@@ -50,8 +175,8 @@ export default function Home() {
     '7', '8', '9', '/',
     '4', '5', '6', '*',
     '1', '2', '3', '-',
-    '0', '.', '=', '+',
-    'C'
+    '0', '.', '=', '+', 
+    'C', 'del'
   ]
   return (
     <>
@@ -62,7 +187,7 @@ export default function Home() {
         <div className="text-container">
     <h1 className="text-4xl font-bold mb10">Calculator</h1>
     <div className="bg p-6 rounded lg shadow-lg t">
-      <input type="text" 
+      <input id="express" type="text" 
       className="w-full mb-2 text-3xl border-b-2 border-gray-400 focus:outline-none t" 
       value={expression}
       readOnly
@@ -86,3 +211,7 @@ export default function Home() {
     </>
   );
 }
+function and(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+
