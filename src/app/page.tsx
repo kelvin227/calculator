@@ -5,8 +5,9 @@ export default function Home() {
   const [result, setResult] = useState('')
   const [expression, setExpression] = useState('')
   let last = '';
-  let replace;
-  let replace2;
+  let replace = '';
+  let replace2 = '';
+
   function getlastChar(char: string) {
     return char[char.length - 1];
   }
