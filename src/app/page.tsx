@@ -37,13 +37,11 @@ export default function Home() {
     } else if(last === '*'){
       replace = expression.toString();
       replace2 = replace.slice(0, -1)
-      try{
+  
     const evalResult= eval(expression + replace2).toString();
     setResult(evalResult);
     setExpression('');
-  } catch(error){
-    setResult('SyntaxError');
-  }
+
   } else if(last === '/'){
     replace = expression.toString();
     replace2 = replace.slice(0, -1)
